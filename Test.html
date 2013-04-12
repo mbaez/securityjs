@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script type="text/javascript" src="securityjs.js"></script>
+        <link type="text/css" rel="stylesheet" href="http://twitter.github.io/bootstrap/assets/css/bootstrap.css" />
+        <link type="text/css" rel="stylesheet" href="http://twitter.github.io/bootstrap/assets/css/bootstrap-responsive.css" />
+        <script type="text/javascript">
+            function getPermisos(){
+                var permisos = [];
+                $("input:checkbox:checked").each(
+                    function(){
+                        permisos.push($(this).val());
+                    }
+                );
+                return permisos;
+            }
+            function refresh(){
+                var permisos = getPermisos();
+                var mode = $("#mode").val().trim();
+                var sjs = new SecurityJS({
+                    permisos : permisos,
+                    mode : mode
+                });
+            }
+        </script>
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span2 offset3">
+                        <select id="mode" class="input-medium">
+                            <option>disable</option>
+                            <option>remove</option>
+                            <option>hide</option>
+                            <option>error</option>
+                        </select>
+                        <br/>
+                        <label>
+                            <input id='permiso1' type="checkbox" value='permiso1'>Permiso1
+                        </label>
+                        <label>
+                            <input id='permiso2' type="checkbox" value='permiso2'>Permiso2
+                        </label>
+                        <label>
+                            <input id='permiso3' type="checkbox" value='permiso3'>Permiso3
+                        </label>
+                        <br/>
+                        <a class="btn" onClick="refresh()">Refresh</a>
+                </div>
+                <div class="span7">
+                    <input require ='permiso1' value="require.permiso1"/>
+                    <br/>
+                    <br/>
+                    <a require ='permiso2;permiso1' class="btn btn-primary">
+                        require.permiso1,
+                        require.permiso2
+                    </a>
+                    <br/>
+                    <br/>
+                    <div require ='permiso3' class="alert">
+                        require.permiso3
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
