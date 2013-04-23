@@ -38,13 +38,13 @@ Below is quick example how to use SecurityJS:
 </div>
 ```
 
-* This code makes disable all html tags, which require a permit that is not defined in the array `permisos`.
+* This code makes disable all html tags, which require a permit that is not defined in the array `data`.
 
 > ```js
 //define your permissions
-var permisos = ['read', 'post', 'edit', 'view-container'];
+var data = ['read', 'post', 'edit', 'view-container'];
 var options = {
-    data : permisos
+    data : data
 };
 //instance securityjs class
 var sjs = new SecurityJS(options);
