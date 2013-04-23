@@ -91,6 +91,7 @@ _securityjs.initialize = function (options){
         // una vez procesado el elemento se elimina el tag para borrar
         // cualquier rastro.
         $(this).removeAttr('data-require');
+        $(this).removeAttr('data-require-mode');
     });
 };
 
