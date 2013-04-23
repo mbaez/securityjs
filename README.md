@@ -1,6 +1,6 @@
 SecurityJS
 ==========
-SecurityJS is a JavaScript library, that aims to simplify the management of permissions in HTML&JavaScript applications. Is based in the use of
+SecurityJS is a JavaScript library, that aims to simplify the management of permissions in HTML&JavaScript applications. It's based on the use of
 [custom data attribute](http://www.w3.org/html/wg/drafts/html/master/dom.html#embedding-custom-non-visible-data-with-the-data-*-attributes)
  in HTML tags.
 ##How it works?
