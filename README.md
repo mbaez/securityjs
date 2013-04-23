@@ -9,9 +9,9 @@ this is possible  ​​using custom data attributes in html tags.
 
 ###Supported attributes
 * **data-require** : contains the required permissions for this tag
-* **data-require-mode** : defines the how to process the tag.
+* **data-require-fail** : defines the how to process the tag.
 
-###Supported modes
+**Supported** `data-require-fail` **values** :
 * **remove** : removes the html tag associated.
 * **disable** : makes it disable the html tag associated.
 * **hide** : makes it hide the html tag associated.
@@ -21,26 +21,26 @@ Below is quick example how to use SecurityJS:
 
 * Download the latest version library and include it in your html.
 
-> ```html
+```html
 <script src="js/jquery.js"></script>
 <script src="js/securityjs.js"></script>
 ```
 
 * Add the `data-require` attribute in your html tags :
 
-> ```html
-<input data-require ='read;edit' data-require-mode='disable' value="require.edit"/>
+```html
+<input data-require ='read;edit' data-require-fail='disable' value="require.edit"/>
 ...
-<button data-require ='edit;post' data-require-mode='remove' class="btn btn-primary">Post</button>
+<button data-require ='edit;post' data-require-fail='remove' class="btn btn-primary">Post</button>
 ...
-<div class='container' data-require='view-container' data-require-mode='hide'>
+<div class='container' data-require='view-container' data-require-fail='hide'>
 ...
 </div>
 ```
 
 * This code makes disable all html tags, which require a permit that is not defined in the array `data`.
 
-> ```js
+```javascript
 //define your permissions
 var data = ['read', 'post', 'edit', 'view-container'];
 var options = {
