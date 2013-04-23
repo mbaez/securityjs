@@ -58,7 +58,7 @@ _securityjs.initialize = function (options){
         // componente de html.
         var toSplit = $(this).attr('data-require');
         //se obtiene el modo de procesar el tag
-        var mode = $(this).attr('data-require-mode');
+        var mode = $(this).attr('data-require-fail');
         //por default se toma remove
         if(typeof mode == "undefined"){
             mode="remove";
@@ -78,7 +78,7 @@ _securityjs.initialize = function (options){
             }else if(mode == 'error'){
                 $(this).html("Forbbiden!!");
             }else{
-                throw  'Value of require-mode `'+mode+'` is not valid';
+                throw  'Value of require-fail `'+mode+'` is not valid';
             }
             //se invoca al hanler
             if(options && options.handler instanceof Function){
@@ -91,7 +91,7 @@ _securityjs.initialize = function (options){
         // una vez procesado el elemento se elimina el tag para borrar
         // cualquier rastro.
         $(this).removeAttr('data-require');
-        $(this).removeAttr('data-require-mode');
+        $(this).removeAttr('data-require-fail');
     });
 };
 
