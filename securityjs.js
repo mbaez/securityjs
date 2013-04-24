@@ -45,15 +45,21 @@ _securityjs.contains = function(require, data){
  * @author <a href="mailto:mxbg.py@gmail.com">Maximiliano Báez</a>
  * @params options {Object}
  * @config data {String[]} La lista de permisos con los que se cuenta.
+ * @config scope {String} El class o el id apartir del cual se van a procesar
+ *          los datos.
  * @config [handler]{Function} Función que se invoca cuando el usuario no
  *          posee permisos.
  */
 _securityjs.initialize = function (options){
     //se obtienen todos los permisos
     var data = options.data;
+    //por defaul el scope es toda la página
+    if(typeof options.scope == "undefined"){
+        options.scope ="";
+    }
     var thiz = this;
     //se obtienen todos los elementos que tienen el atributo require
-    $('[data-require]').each(function(){
+    $(options.scope+' [data-require]').each(function(){
         // se obtienen los permisos definidos en atributo require del
         // componente de html.
         var toSplit = $(this).attr('data-require');
