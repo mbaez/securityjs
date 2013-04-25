@@ -69,7 +69,7 @@ var sjs = new SecurityJS({
 
 ```
 
-In the same way, the handlers of the default states can be overwritten
+*In the same way, the handlers of the default states can be overwritten.*
 
 ```javascript
 var sjs = new SecurityJS({
