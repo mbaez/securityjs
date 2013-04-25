@@ -261,17 +261,6 @@ para verificar los permisos de las vistas.</div>
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/SecurityJS.html#contains">contains</a></b>
-								</div>
-								<div class="description">Este método se encarga de verificar que todos los permisos definidos
-en `require` se encuentren en `permisos`.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">
 								<b><a href="../symbols/SecurityJS.html#data">data</a></b>
 								</div>
 								<div class="description">La lista de permisos con los que se cuenta.</div>
@@ -282,20 +271,9 @@ en `require` se encuentren en `permisos`.</div>
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/SecurityJS.html#initialize">initialize</a></b>
-								</div>
-								<div class="description">Este método se encarga de verificar los permisos del usuario y
-realizar una opreacion dependiendo del modo asociado al tag HTML.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">
 								<b><a href="../symbols/SecurityJS.html#scope">scope</a></b>
 								</div>
-								<div class="description">Por defaul el scope es toda la página</div>
+								<div class="description">Por default el scope es toda la página</div>
 							</td>
 						</tr>
 					
@@ -332,6 +310,16 @@ realizar una opreacion dependiendo del modo asociado al tag HTML.</div>
 						<tr>
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/SecurityJS.html#contains">contains</a></b>(require, data)
+								</div>
+								<div class="description">Este método se encarga de verificar que todos los permisos definidos
+en `require` se encuentren en `permisos`.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
 								<div class="fixedFont"><b><a href="../symbols/SecurityJS.html#disable">disable</a></b>()
 								</div>
 								<div class="description">Se encarga de manejar aquellos elementos que cuenten con el valor
@@ -357,6 +345,16 @@ el atributo disable al dom asociado al permiso.</div>
 								</div>
 								<div class="description">Se encarga de manejar aquellos elementos que cuenten con el valor
 `hide` en el atributo `data-require-fail`.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/SecurityJS.html#initialize">initialize</a></b>()
+								</div>
+								<div class="description">Este método se encarga de verificar los permisos del usuario y
+realizar una opreacion dependiendo del modo asociado al tag HTML.</div>
 							</td>
 						</tr>
 					
@@ -484,29 +482,6 @@ para verificar los permisos de las vistas.
 					Field Detail
 				</div>
 				
-					<a name="contains"> </a>
-					<div class="fixedFont">
-					
-					<span class="light">{Boolean}</span>
-					<b>contains</b>
-					
-					</div>
-					<div class="description">
-						Este método se encarga de verificar que todos los permisos definidos
-en `require` se encuentren en `permisos`.
-						
-						<br /><i>Author: </i><a href="mailto:mxbg.py@gmail.com">Maximiliano Báez</a>.
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					<hr />
-				
 					<a name="data"> </a>
 					<div class="fixedFont">
 					
@@ -529,29 +504,6 @@ en `require` se encuentren en `permisos`.
 
 					<hr />
 				
-					<a name="initialize"> </a>
-					<div class="fixedFont">
-					
-					
-					<b>initialize</b>
-					
-					</div>
-					<div class="description">
-						Este método se encarga de verificar los permisos del usuario y
-realizar una opreacion dependiendo del modo asociado al tag HTML.
-						
-						<br /><i>Author: </i><a href="mailto:mxbg.py@gmail.com">Maximiliano Báez</a>.
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					<hr />
-				
 					<a name="scope"> </a>
 					<div class="fixedFont">
 					
@@ -560,7 +512,7 @@ realizar una opreacion dependiendo del modo asociado al tag HTML.
 					
 					</div>
 					<div class="description">
-						Por defaul el scope es toda la página
+						Por default el scope es toda la página
 						
 						
 					</div>
@@ -613,6 +565,57 @@ Se eliminan los atributos `data-require` y `data-require-fail`.
 						
 						
 						
+						
+						
+						
+
+					<hr />
+				
+					<a name="contains"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{Boolean}</span>
+					<b>contains</b>(require, data)
+					
+					</div>
+					<div class="description">
+						Este método se encarga de verificar que todos los permisos definidos
+en `require` se encuentren en `permisos`.
+						
+						<br /><i>Author: </i><a href="mailto:mxbg.py@gmail.com">Maximiliano Báez</a>.
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<b>require</b>
+									
+								</dt>
+								<dd>{String[]} El array de permisos necesarios</dd>
+							
+								<dt>
+									<b>data</b>
+									
+								</dt>
+								<dd>{String[]} El array de permisos obtenidos.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Boolean}</span> True si todos existen todos los permisos,
+         en caso contrario retorna False.</dd>
+							
+							</dl>
 						
 						
 						
@@ -754,6 +757,32 @@ style `visibility:hidden` para ocultar el dom asociado al permiso.
 
 					<hr />
 				
+					<a name="initialize"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>initialize</b>()
+					
+					</div>
+					<div class="description">
+						Este método se encarga de verificar los permisos del usuario y
+realizar una opreacion dependiendo del modo asociado al tag HTML.
+						
+						<br /><i>Author: </i><a href="mailto:mxbg.py@gmail.com">Maximiliano Báez</a>.
+					</div>
+					
+					
+					
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
 					<a name="remove"> </a>
 					<div class="fixedFont">
 					
@@ -811,7 +840,7 @@ el dom asociado al permiso.
 <!-- ============================== footer ================================= -->
 		<div class="fineprint" style="clear:both">
 			
-			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Thu Apr 25 2013 12:10:57 GMT-0400 (PYT)
+			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Thu Apr 25 2013 14:50:32 GMT-0400 (PYT)
 		</div>
 	</body>
 </html>

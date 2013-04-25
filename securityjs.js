@@ -93,7 +93,9 @@ var _securityjs = {
 /**
  * Este método se encarga de verificar que todos los permisos definidos
  * en `require` se encuentren en `permisos`.
+ * @function
  *
+ * @public
  * @author <a href="mailto:mxbg.py@gmail.com">Maximiliano Báez</a>
  * @name SecurityJS#contains
  * @param require {String[]} El array de permisos necesarios
