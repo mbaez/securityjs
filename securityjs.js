@@ -21,8 +21,9 @@ var _securityjs = {
      *
      * @public
      * @name SecurityJS#remove
-     * @config el {Dom} El dom asociado al tag procesado.
-     * @config require {String[]} el valor definido en el atributo
+     * @param options
+     * @config {Dom}el  El dom asociado al tag procesado.
+     * @config {String[]}require el valor definido en el atributo
      *          data-require del `el` procesado.
      */
     remove : function(options){
@@ -38,8 +39,9 @@ var _securityjs = {
 
      * @public
      * @name SecurityJS#disable
-     * @config el {Dom} El dom asociado al tag procesado.
-     * @config require {String[]} el valor definido en el atributo
+     * @param options
+     * @config {Dom}el El dom asociado al tag procesado.
+     * @config {String[]}require el valor definido en el atributo
      *          data-require del `el` procesado.
      */
     disable : function(options){
@@ -53,8 +55,9 @@ var _securityjs = {
      *
      * @public
      * @name SecurityJS#hide
-     * @config el {Dom} El dom asociado al tag procesado.
-     * @config require {String[]} el valor definido en el atributo
+     * @param options
+     * @config {Dom}el El dom asociado al tag procesado.
+     * @config {String[]}require El valor definido en el atributo
      *          data-require del `el` procesado.
      */
     hide : function(options){
@@ -68,8 +71,9 @@ var _securityjs = {
      *
      * @public
      * @name SecurityJS#error
-     * @config el {Dom} El dom asociado al tag procesado.
-     * @config require {String[]} el valor definido en el atributo
+     * @param options
+     * @config {Dom}el  El dom asociado al tag procesado.
+     * @config {String[]}require  el valor definido en el atributo
      *          data-require del `el` procesado.
      */
     error : function(options){
@@ -82,7 +86,7 @@ var _securityjs = {
      *
      * @public
      * @name SecurityJS#afterProcess
-     * @param el {Dom} El dom asociado al tag procesado.
+     * @param {Dom}el  El dom asociado al tag procesado.
      */
     afterProcess : function(el){
         $(el).removeAttr('data-require');
@@ -98,8 +102,8 @@ var _securityjs = {
  * @public
  * @author <a href="mailto:mxbg.py@gmail.com">Maximiliano Báez</a>
  * @name SecurityJS#contains
- * @param require {String[]} El array de permisos necesarios
- * @param data {String[]} El array de permisos obtenidos.
+ * @param {String[]}require  El array de permisos necesarios
+ * @param {String[]}data  El array de permisos obtenidos.
  * @return {Boolean} True si todos existen todos los permisos,
  *          en caso contrario retorna False.
  */
@@ -170,34 +174,34 @@ _securityjs.initialize = function (){
  * @class
  * @name SecurityJS
  * @author <a href="mailto:mxbg.py@gmail.com">Maximiliano Báez</a>
-
- * @config data {String[]} La lista de permisos con los que se cuenta.
+ * @param options
+ * @config {String[]}data  La lista de permisos con los que se cuenta.
  *
- * @config [scope] {String} El class o el id apartir del cual se van a
+ * @config {String}[scope] El class o el id apartir del cual se van a
  *          procesar los datos. Por default el scope es todo el documento.
  *
- * @config [handler]{Function} Función que es invocada simpre que  el
+ * @config {Function}[handler] Función que es invocada simpre que  el
  *          usuario no posea permisos.
  *
- * @config [remove]{Function} Se encarga de manejar aquellos elementos q
+ * @config {Function}[remove] Se encarga de manejar aquellos elementos q
  *          ue cuenten con el valor`remove` en el atributo `data-require-fail`.
  *          Por default se elimina el dom asociado al permiso.
  *
- * @config [disable]{Function} Se encarga de manejar aquellos elementos
+ * @config {Function}[disable] Se encarga de manejar aquellos elementos
  *          que cuenten con el valor `disable` en el atributo
  *          `data-require-fail`.Por default añade el atributo disable al
  *          dom asociado al permiso.
  *
- * @config [hide]{Function}  Se encarga de manejar aquellos elementos que
+ * @config {Function}[hide]  Se encarga de manejar aquellos elementos que
  *          cuenten con el valor `hide` en el atributo `data-require-fail`.
  *          Por default añade el style `visibility:hidden` para ocultar el
  *          dom asociado al permiso.
  *
- * @config [error]{Function} Se encarga de manejar aquellos elementos que
+ * @config {Function}[error] Se encarga de manejar aquellos elementos que
  *          cuenten con el valor `error` en el atributo `data-require-fail`.
  *          Por default carga un mensaje de error en el dom asociado al permiso.
  *
- * @config [afterProcess]{Function} Este método se invoca una vez que el
+ * @config {Function}[afterProcess] Este método se invoca una vez que el
  *         `el` fue procesado. Por default se eliminan los atributos
  *         `data-require` y `data-require-fail`.
  */
