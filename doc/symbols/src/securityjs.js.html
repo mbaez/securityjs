@@ -1,0 +1,219 @@
+<html><head><meta http-equiv="content-type" content="text/html; charset=utf-8"> <style>
+	.KEYW {color: #933;}
+	.COMM {color: #bbb; font-style: italic;}
+	.NUMB {color: #393;}
+	.STRN {color: #393;}
+	.REGX {color: #339;}
+	.line {border-right: 1px dotted #666; color: #666; font-style: normal;}
+	</style></head><body><pre><span class='line'>  1</span> <span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">_securityjs</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>  2</span> </span><span class="WHIT">    </span><span class="COMM">/**
+<span class='line'>  3</span>      * Por defaul el scope es toda la página
+<span class='line'>  4</span>      * @type String
+<span class='line'>  5</span>      * @field
+<span class='line'>  6</span>      * @name SecurityJS#scope
+<span class='line'>  7</span>      */</span><span class="WHIT">
+<span class='line'>  8</span> </span><span class="WHIT">    </span><span class="NAME">scope</span><span class="WHIT"> </span><span class="PUNC">:</span><span class="WHIT"> </span><span class="STRN">""</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>  9</span> </span><span class="WHIT">    </span><span class="COMM">/**
+<span class='line'> 10</span>      * La lista de permisos con los que se cuenta.
+<span class='line'> 11</span>      * @type String[]
+<span class='line'> 12</span>      * @field
+<span class='line'> 13</span>      * @name SecurityJS#data
+<span class='line'> 14</span>      */</span><span class="WHIT">
+<span class='line'> 15</span> </span><span class="WHIT">    </span><span class="NAME">data</span><span class="WHIT"> </span><span class="PUNC">:</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 16</span> </span><span class="WHIT">    </span><span class="COMM">/**
+<span class='line'> 17</span>      * Se encarga de manejar aquellos elementos que cuenten con el valor
+<span class='line'> 18</span>      * `remove` en el atributo `data-require-fail`.Por default se elimina
+<span class='line'> 19</span>      * el dom asociado al permiso.
+<span class='line'> 20</span>      * @function
+<span class='line'> 21</span>      *
+<span class='line'> 22</span>      * @public
+<span class='line'> 23</span>      * @name SecurityJS#remove
+<span class='line'> 24</span>      * @config el {Dom} El dom asociado al tag procesado.
+<span class='line'> 25</span>      * @config require {String[]} el valor definido en el atributo
+<span class='line'> 26</span>      *          data-require del `el` procesado.
+<span class='line'> 27</span>      */</span><span class="WHIT">
+<span class='line'> 28</span> </span><span class="WHIT">    </span><span class="NAME">remove</span><span class="WHIT"> </span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="NAME">options</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 29</span> </span><span class="WHIT">        </span><span class="COMM">//se elimina el elemento si el usuario no posee los</span><span class="WHIT">
+<span class='line'> 30</span> </span><span class="WHIT">        </span><span class="COMM">//permisos necesarios para ver el componente.</span><span class="WHIT">
+<span class='line'> 31</span> </span><span class="WHIT">        </span><span class="NAME">$</span><span class="PUNC">(</span><span class="NAME">options.el</span><span class="PUNC">)</span><span class="PUNC">.</span><span class="NAME">remove</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 32</span> </span><span class="WHIT">    </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 33</span> </span><span class="WHIT">    </span><span class="COMM">/**
+<span class='line'> 34</span>      * Se encarga de manejar aquellos elementos que cuenten con el valor
+<span class='line'> 35</span>      * `disable` en el atributo `data-require-fail`.Por default añade
+<span class='line'> 36</span>      * el atributo disable al dom asociado al permiso.
+<span class='line'> 37</span>      * @function
+<span class='line'> 38</span> 
+<span class='line'> 39</span>      * @public
+<span class='line'> 40</span>      * @name SecurityJS#disable
+<span class='line'> 41</span>      * @config el {Dom} El dom asociado al tag procesado.
+<span class='line'> 42</span>      * @config require {String[]} el valor definido en el atributo
+<span class='line'> 43</span>      *          data-require del `el` procesado.
+<span class='line'> 44</span>      */</span><span class="WHIT">
+<span class='line'> 45</span> </span><span class="WHIT">    </span><span class="NAME">disable</span><span class="WHIT"> </span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="NAME">options</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 46</span> </span><span class="WHIT">        </span><span class="NAME">$</span><span class="PUNC">(</span><span class="NAME">options.el</span><span class="PUNC">)</span><span class="PUNC">.</span><span class="NAME">attr</span><span class="PUNC">(</span><span class="STRN">'disabled'</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="KEYW">true</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 47</span> </span><span class="WHIT">    </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 48</span> </span><span class="WHIT">    </span><span class="COMM">/**
+<span class='line'> 49</span>      * Se encarga de manejar aquellos elementos que cuenten con el valor
+<span class='line'> 50</span>      * `hide` en el atributo `data-require-fail`. Por default añade el
+<span class='line'> 51</span>      * style `visibility:hidden` para ocultar el dom asociado al permiso.
+<span class='line'> 52</span>      * @function
+<span class='line'> 53</span>      *
+<span class='line'> 54</span>      * @public
+<span class='line'> 55</span>      * @name SecurityJS#hide
+<span class='line'> 56</span>      * @config el {Dom} El dom asociado al tag procesado.
+<span class='line'> 57</span>      * @config require {String[]} el valor definido en el atributo
+<span class='line'> 58</span>      *          data-require del `el` procesado.
+<span class='line'> 59</span>      */</span><span class="WHIT">
+<span class='line'> 60</span> </span><span class="WHIT">    </span><span class="NAME">hide</span><span class="WHIT"> </span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="NAME">options</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 61</span> </span><span class="WHIT">        </span><span class="NAME">$</span><span class="PUNC">(</span><span class="NAME">options.el</span><span class="PUNC">)</span><span class="PUNC">.</span><span class="NAME">attr</span><span class="PUNC">(</span><span class="STRN">'style'</span><span class="PUNC">,</span><span class="STRN">'visibility:hidden'</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 62</span> </span><span class="WHIT">    </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 63</span> </span><span class="WHIT">    </span><span class="COMM">/**
+<span class='line'> 64</span>      * Se encarga de manejar aquellos elementos que cuenten con el valor
+<span class='line'> 65</span>      * `error` en el atributo `data-require-fail`. Por default carga un
+<span class='line'> 66</span>      * mensaje de error en el dom asociado al permiso.
+<span class='line'> 67</span>      * @function
+<span class='line'> 68</span>      *
+<span class='line'> 69</span>      * @public
+<span class='line'> 70</span>      * @name SecurityJS#error
+<span class='line'> 71</span>      * @config el {Dom} El dom asociado al tag procesado.
+<span class='line'> 72</span>      * @config require {String[]} el valor definido en el atributo
+<span class='line'> 73</span>      *          data-require del `el` procesado.
+<span class='line'> 74</span>      */</span><span class="WHIT">
+<span class='line'> 75</span> </span><span class="WHIT">    </span><span class="NAME">error</span><span class="WHIT"> </span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="NAME">options</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 76</span> </span><span class="WHIT">        </span><span class="NAME">$</span><span class="PUNC">(</span><span class="NAME">options.el</span><span class="PUNC">)</span><span class="PUNC">.</span><span class="NAME">html</span><span class="PUNC">(</span><span class="STRN">"Forbbiden!!"</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 77</span> </span><span class="WHIT">    </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 78</span> </span><span class="WHIT">    </span><span class="COMM">/**
+<span class='line'> 79</span>      * Este método se invoca una vez que el `el` fue procesado. Por default
+<span class='line'> 80</span>      * Se eliminan los atributos `data-require` y `data-require-fail`.
+<span class='line'> 81</span>      * @function
+<span class='line'> 82</span>      *
+<span class='line'> 83</span>      * @public
+<span class='line'> 84</span>      * @name SecurityJS#afterProcess
+<span class='line'> 85</span>      * @param el {Dom} El dom asociado al tag procesado.
+<span class='line'> 86</span>      */</span><span class="WHIT">
+<span class='line'> 87</span> </span><span class="WHIT">    </span><span class="NAME">afterProcess</span><span class="WHIT"> </span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="NAME">el</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 88</span> </span><span class="WHIT">        </span><span class="NAME">$</span><span class="PUNC">(</span><span class="NAME">el</span><span class="PUNC">)</span><span class="PUNC">.</span><span class="NAME">removeAttr</span><span class="PUNC">(</span><span class="STRN">'data-require'</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 89</span> </span><span class="WHIT">        </span><span class="NAME">$</span><span class="PUNC">(</span><span class="NAME">el</span><span class="PUNC">)</span><span class="PUNC">.</span><span class="NAME">removeAttr</span><span class="PUNC">(</span><span class="STRN">'data-require-fail'</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 90</span> </span><span class="WHIT">    </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'> 91</span> </span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 92</span> 
+<span class='line'> 93</span> </span><span class="COMM">/**
+<span class='line'> 94</span>  * Este método se encarga de verificar que todos los permisos definidos
+<span class='line'> 95</span>  * en `require` se encuentren en `permisos`.
+<span class='line'> 96</span>  *
+<span class='line'> 97</span>  * @author &lt;a href="mailto:mxbg.py@gmail.com">Maximiliano Báez&lt;/a>
+<span class='line'> 98</span>  * @name SecurityJS#contains
+<span class='line'> 99</span>  * @param require {String[]} El array de permisos necesarios
+<span class='line'>100</span>  * @param data {String[]} El array de permisos obtenidos.
+<span class='line'>101</span>  * @return {Boolean} True si todos existen todos los permisos,
+<span class='line'>102</span>  *          en caso contrario retorna False.
+<span class='line'>103</span>  */</span><span class="WHIT">
+<span class='line'>104</span> </span><span class="NAME">_securityjs.contains</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="NAME">require</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">data</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>105</span> </span><span class="WHIT">    </span><span class="KEYW">for</span><span class="PUNC">(</span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">i</span><span class="PUNC">=</span><span class="NUMB">0</span><span class="PUNC">;</span><span class="WHIT"> </span><span class="NAME">i</span><span class="PUNC">&lt;</span><span class="NAME">require.length</span><span class="PUNC">;</span><span class="WHIT"> </span><span class="NAME">i</span><span class="PUNC">++</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>106</span> </span><span class="WHIT">        </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">permiso</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">require</span><span class="PUNC">[</span><span class="NAME">i</span><span class="PUNC">]</span><span class="PUNC">.</span><span class="NAME">trim</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>107</span> </span><span class="WHIT">        </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">status</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">data.indexOf</span><span class="PUNC">(</span><span class="NAME">permiso</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">>=</span><span class="WHIT"> </span><span class="NUMB">0</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>108</span> </span><span class="WHIT">        </span><span class="KEYW">if</span><span class="PUNC">(</span><span class="PUNC">!</span><span class="NAME">status</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>109</span> </span><span class="WHIT">            </span><span class="KEYW">return</span><span class="WHIT"> </span><span class="KEYW">false</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>110</span> </span><span class="WHIT">        </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>111</span> </span><span class="WHIT">    </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>112</span> </span><span class="WHIT">    </span><span class="KEYW">return</span><span class="WHIT"> </span><span class="KEYW">true</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>113</span> </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>114</span> 
+<span class='line'>115</span> </span><span class="COMM">/**
+<span class='line'>116</span>  * Este método se encarga de verificar los permisos del usuario y
+<span class='line'>117</span>  * realizar una opreacion dependiendo del modo asociado al tag HTML.
+<span class='line'>118</span>  *
+<span class='line'>119</span>  * @author &lt;a href="mailto:mxbg.py@gmail.com">Maximiliano Báez&lt;/a>
+<span class='line'>120</span>  * @name SecurityJS#initialize
+<span class='line'>121</span>  */</span><span class="WHIT">
+<span class='line'>122</span> </span><span class="NAME">_securityjs.initialize</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>123</span> </span><span class="WHIT">    </span><span class="COMM">//se obtienen todos los permisos</span><span class="WHIT">
+<span class='line'>124</span> </span><span class="WHIT">    </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">thiz</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">this</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>125</span> </span><span class="WHIT">    </span><span class="COMM">//se obtienen todos los elementos que tienen el atributo require</span><span class="WHIT">
+<span class='line'>126</span> </span><span class="WHIT">    </span><span class="NAME">$</span><span class="PUNC">(</span><span class="NAME">this.scope</span><span class="PUNC">+</span><span class="STRN">' [data-require]'</span><span class="PUNC">)</span><span class="PUNC">.</span><span class="NAME">each</span><span class="PUNC">(</span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>127</span> </span><span class="WHIT">        </span><span class="COMM">// se obtienen los permisos definidos en atributo require del</span><span class="WHIT">
+<span class='line'>128</span> </span><span class="WHIT">        </span><span class="COMM">// componente de html.</span><span class="WHIT">
+<span class='line'>129</span> </span><span class="WHIT">        </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">toSplit</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">$</span><span class="PUNC">(</span><span class="KEYW">this</span><span class="PUNC">)</span><span class="PUNC">.</span><span class="NAME">attr</span><span class="PUNC">(</span><span class="STRN">'data-require'</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>130</span> </span><span class="WHIT">        </span><span class="COMM">//se obtiene el modo de procesar el tag</span><span class="WHIT">
+<span class='line'>131</span> </span><span class="WHIT">        </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">mode</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">$</span><span class="PUNC">(</span><span class="KEYW">this</span><span class="PUNC">)</span><span class="PUNC">.</span><span class="NAME">attr</span><span class="PUNC">(</span><span class="STRN">'data-require-fail'</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>132</span> </span><span class="WHIT">        </span><span class="COMM">//por default se toma remove</span><span class="WHIT">
+<span class='line'>133</span> </span><span class="WHIT">        </span><span class="KEYW">if</span><span class="PUNC">(</span><span class="KEYW">typeof</span><span class="WHIT"> </span><span class="NAME">mode</span><span class="WHIT"> </span><span class="PUNC">==</span><span class="WHIT"> </span><span class="STRN">"undefined"</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>134</span> </span><span class="WHIT">            </span><span class="NAME">mode</span><span class="PUNC">=</span><span class="STRN">"remove"</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>135</span> </span><span class="WHIT">        </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>136</span> </span><span class="WHIT">        </span><span class="COMM">//se separa los elementos</span><span class="WHIT">
+<span class='line'>137</span> </span><span class="WHIT">        </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">require</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">toSplit.split</span><span class="PUNC">(</span><span class="STRN">';'</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>138</span> </span><span class="WHIT">        </span><span class="COMM">//se verifica si existen posee los permisos.</span><span class="WHIT">
+<span class='line'>139</span> </span><span class="WHIT">        </span><span class="KEYW">if</span><span class="PUNC">(</span><span class="PUNC">!</span><span class="NAME">thiz.contains</span><span class="PUNC">(</span><span class="NAME">require</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">thiz.data</span><span class="PUNC">)</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>140</span> </span><span class="WHIT">            </span><span class="COMM">//se verifica si el modo esta soportado</span><span class="WHIT">
+<span class='line'>141</span> </span><span class="WHIT">            </span><span class="KEYW">if</span><span class="PUNC">(</span><span class="NAME">thiz</span><span class="PUNC">[</span><span class="NAME">mode</span><span class="PUNC">]</span><span class="WHIT"> </span><span class="KEYW">instanceof</span><span class="WHIT"> </span><span class="NAME">Function</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>142</span> </span><span class="WHIT">                </span><span class="COMM">//se invoca al encargado de procesar el elemento</span><span class="WHIT">
+<span class='line'>143</span> </span><span class="WHIT">                </span><span class="NAME">thiz</span><span class="PUNC">[</span><span class="NAME">mode</span><span class="PUNC">]</span><span class="PUNC">(</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>144</span> </span><span class="WHIT">                    </span><span class="NAME">el</span><span class="WHIT"> </span><span class="PUNC">:</span><span class="NAME">$</span><span class="PUNC">(</span><span class="KEYW">this</span><span class="PUNC">)</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>145</span> </span><span class="WHIT">                    </span><span class="NAME">require</span><span class="WHIT"> </span><span class="PUNC">:</span><span class="WHIT"> </span><span class="NAME">require</span><span class="WHIT">
+<span class='line'>146</span> </span><span class="WHIT">                </span><span class="PUNC">}</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>147</span> </span><span class="WHIT">            </span><span class="PUNC">}</span><span class="KEYW">else</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>148</span> </span><span class="WHIT">                </span><span class="KEYW">throw</span><span class="WHIT">  </span><span class="STRN">'Value of data-require-fail `'</span><span class="PUNC">+</span><span class="NAME">mode</span><span class="PUNC">+</span><span class="STRN">'` is not valid'</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>149</span> </span><span class="WHIT">            </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>150</span> </span><span class="WHIT">            </span><span class="COMM">//se invoca al handler si es que este existe</span><span class="WHIT">
+<span class='line'>151</span> </span><span class="WHIT">            </span><span class="KEYW">if</span><span class="PUNC">(</span><span class="NAME">thiz.handler</span><span class="WHIT"> </span><span class="KEYW">instanceof</span><span class="WHIT"> </span><span class="NAME">Function</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>152</span> </span><span class="WHIT">                </span><span class="NAME">options.handler</span><span class="PUNC">(</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>153</span> </span><span class="WHIT">                    </span><span class="NAME">el</span><span class="WHIT"> </span><span class="PUNC">:</span><span class="NAME">$</span><span class="PUNC">(</span><span class="KEYW">this</span><span class="PUNC">)</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>154</span> </span><span class="WHIT">                    </span><span class="NAME">require</span><span class="WHIT"> </span><span class="PUNC">:</span><span class="WHIT"> </span><span class="NAME">require</span><span class="WHIT">
+<span class='line'>155</span> </span><span class="WHIT">                </span><span class="PUNC">}</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>156</span> </span><span class="WHIT">            </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>157</span> </span><span class="WHIT">        </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>158</span> </span><span class="WHIT">        </span><span class="NAME">thiz.afterProcess</span><span class="PUNC">(</span><span class="NAME">$</span><span class="PUNC">(</span><span class="KEYW">this</span><span class="PUNC">)</span><span class="PUNC">)</span><span class="WHIT">
+<span class='line'>159</span> </span><span class="WHIT">    </span><span class="PUNC">}</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>160</span> </span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>161</span> 
+<span class='line'>162</span> </span><span class="COMM">/**
+<span class='line'>163</span>  * Esta calse se utiliza para agrupar los metodos que se utilizan
+<span class='line'>164</span>  * para verificar los permisos de las vistas.
+<span class='line'>165</span>  *
+<span class='line'>166</span>  * @class
+<span class='line'>167</span>  * @name SecurityJS
+<span class='line'>168</span>  * @author &lt;a href="mailto:mxbg.py@gmail.com">Maximiliano Báez&lt;/a>
+<span class='line'>169</span> 
+<span class='line'>170</span>  * @config data {String[]} La lista de permisos con los que se cuenta.
+<span class='line'>171</span>  *
+<span class='line'>172</span>  * @config [scope] {String} El class o el id apartir del cual se van a
+<span class='line'>173</span>  *          procesar los datos. Por default el scope es todo el documento.
+<span class='line'>174</span>  *
+<span class='line'>175</span>  * @config [handler]{Function} Función que es invocada simpre que  el
+<span class='line'>176</span>  *          usuario no posea permisos.
+<span class='line'>177</span>  *
+<span class='line'>178</span>  * @config [remove]{Function} Se encarga de manejar aquellos elementos q
+<span class='line'>179</span>  *          ue cuenten con el valor`remove` en el atributo `data-require-fail`.
+<span class='line'>180</span>  *          Por default se elimina el dom asociado al permiso.
+<span class='line'>181</span>  *
+<span class='line'>182</span>  * @config [disable]{Function} Se encarga de manejar aquellos elementos
+<span class='line'>183</span>  *          que cuenten con el valor `disable` en el atributo
+<span class='line'>184</span>  *          `data-require-fail`.Por default añade el atributo disable al
+<span class='line'>185</span>  *          dom asociado al permiso.
+<span class='line'>186</span>  *
+<span class='line'>187</span>  * @config [hide]{Function}  Se encarga de manejar aquellos elementos que
+<span class='line'>188</span>  *          cuenten con el valor `hide` en el atributo `data-require-fail`.
+<span class='line'>189</span>  *          Por default añade el style `visibility:hidden` para ocultar el
+<span class='line'>190</span>  *          dom asociado al permiso.
+<span class='line'>191</span>  *
+<span class='line'>192</span>  * @config [error]{Function} Se encarga de manejar aquellos elementos que
+<span class='line'>193</span>  *          cuenten con el valor `error` en el atributo `data-require-fail`.
+<span class='line'>194</span>  *          Por default carga un mensaje de error en el dom asociado al permiso.
+<span class='line'>195</span>  *
+<span class='line'>196</span>  * @config [afterProcess]{Function} Este método se invoca una vez que el
+<span class='line'>197</span>  *         `el` fue procesado. Por default se eliminan los atributos
+<span class='line'>198</span>  *         `data-require` y `data-require-fail`.
+<span class='line'>199</span>  */</span><span class="WHIT">
+<span class='line'>200</span> </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">SecurityJS</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">options</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>201</span> </span><span class="WHIT">    </span><span class="KEYW">if</span><span class="PUNC">(</span><span class="PUNC">!</span><span class="NAME">options</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="NAME">options</span><span class="PUNC">=</span><span class="PUNC">{</span><span class="PUNC">}</span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>202</span> </span><span class="WHIT">    </span><span class="COMM">//se define la clase</span><span class="WHIT">
+<span class='line'>203</span> </span><span class="WHIT">    </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">clazz</span><span class="PUNC">=</span><span class="PUNC">{</span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>204</span> </span><span class="WHIT">    </span><span class="COMM">//se realiza un extend de json principal para y un merge entre</span><span class="WHIT">
+<span class='line'>205</span> </span><span class="WHIT">    </span><span class="COMM">//los atributos y metodos.</span><span class="WHIT">
+<span class='line'>206</span> </span><span class="WHIT">    </span><span class="NAME">$.extend</span><span class="PUNC">(</span><span class="KEYW">true</span><span class="PUNC">,</span><span class="NAME">clazz</span><span class="PUNC">,</span><span class="NAME">_securityjs</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">options</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>207</span> </span><span class="WHIT">    </span><span class="COMM">//se invoca al constructor de la clase</span><span class="WHIT">
+<span class='line'>208</span> </span><span class="WHIT">    </span><span class="NAME">clazz.initialize</span><span class="PUNC">(</span><span class="NAME">options</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>209</span> </span><span class="WHIT">    </span><span class="COMM">//se retorna la definicion de la clase</span><span class="WHIT">
+<span class='line'>210</span> </span><span class="WHIT">    </span><span class="KEYW">return</span><span class="WHIT"> </span><span class="NAME">clazz</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>211</span> </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>212</span> </span></pre></body></html>
