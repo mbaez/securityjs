@@ -94,4 +94,4 @@ SecurityJS has been tested in IE 8+, Firefox 4+, Safari 5+, Chromium 25+ and Ope
 ##Want to contribute?
 
 If you've found a bug or have a great idea for new feature let me know by [adding your suggestion]
-(http://github.com/mbaez/SecurityJS/issues/new) to [issues list](https://github.com/mbaez/SecurityJS/issues).
+(http://github.com/mbaez/securityjs/issues/new) to [issues list](https://github.com/mbaez/securityjs/issues).
