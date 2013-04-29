@@ -1,0 +1,36 @@
+/*
+Description:
+Author : Maximiliano Báez
+Author Mail : mbaez@konecta.com.py
+Version: 1.0
+*/
+
+div .single-border {
+    border: 1px solid #eee;border-radius:5px;
+}
+
+div .single-border-top {
+    border-top: 1px solid #eee;border-radius:5px;
+}
+
+div .single-border-button {
+    border-bottom: 1px solid #eee;border-radius:5px;
+}
+
+div .single-border-left {
+    border-left: 1px solid #eee;border-radius:5px;
+}
+
+div .single-border-right {
+    border-right: 1px solid #eee;border-radius:5px;
+}
+
+div .single-border-box {
+    border-right: 1px solid #eee;border-radius:5px;
+    border-left: 1px solid #eee;border-radius:5px;
+    border-bottom: 1px solid #eee;border-radius:5px;
+}
+
+a {
+    cursor : pointer;
+}
