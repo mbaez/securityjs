@@ -8,7 +8,8 @@ SecurityJS uses [JQuery](http://jquery.com/) to process each html tag  pre confi
 this is possible  ​​using custom data attributes in html tags.
 
 ###Supported attributes
-* **data-require** : contains the required permissions for this tag
+* **data-require** : contains the required permissions for this tag. If the item does not have the permission,  triggers the event 'require-fail'.
+* **data-not-require** : it's negation of the attribute 'data-require'. If the item has the permission, triggers the event 'require-fail'.
 * **data-require-fail** : defines the state and how to process the tag.
 
 `data-require-fail` **states supported by default** :
@@ -33,6 +34,8 @@ Below is quick example how to use SecurityJS:
 <input data-require ='read;edit' data-require-fail='disable' value="require.edit"/>
 ...
 <button data-require ='edit;post' data-require-fail='remove' class="btn btn-primary">Post</button>
+...
+<button data-not-require ='login' data-require-fail='remove' class="btn btn-primary">Login</button>
 ...
 <div class='container' data-require='view-container' data-require-fail='hide'>
 ...
