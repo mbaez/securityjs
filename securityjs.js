@@ -119,6 +119,76 @@ _securityjs.contains = function(require, data){
 }
 
 /**
+ * Este método se encarga de verificar que todos los permisos definidos
+ * en `not- require` no se encuentren en `permisos`.
+ * @function
+ *
+ * @public
+ * @author <a href="mailto:mxbg.py@gmail.com">Maximiliano Báez</a>
+ * @name SecurityJS#notContains
+ * @param {String[]}require  El array de permisos necesarios
+ * @param {String[]}data  El array de permisos obtenidos.
+ * @return {Boolean} True si no existen todos los permisos,
+ *          en caso contrario retorna False.
+ */
+_securityjs.notContains = function(require, data){
+    for(var i=0; i<require.length; i++){
+        var permiso = require[i].trim();
+        var status = (data.indexOf(permiso) >= 0);
+        if(status){
+            return false;
+        }
+    }
+    return true;
+}
+
+/**
+ * Este método se encarga de procesar los nodos anotados con require.
+ * @function
+ *
+ * @public
+ * @author <a href="mailto:mxbg.py@gmail.com">Maximiliano Báez</a>
+ * @name SecurityJS#processDom
+ * @param {Document} el  El nodo a procesar.
+ * @param {String} dataAttr  el nombre del data-attribute a porocesar.
+ * @param {Function} comparator  Funcion que se encarga de comparar los
+ *      los elementos.
+ */
+_securityjs.processDom =  function(el, dataAttr, comparator){
+    // se obtienen los permisos definidos en atributo require del
+    // componente de html.
+    var toSplit = $(el).attr(dataAttr);
+    //se obtiene el modo de procesar el tag
+    var mode = $(el).attr('data-require-fail');
+    //por default se toma remove
+    if(typeof mode == "undefined"){
+        mode="remove";
+    }
+    //se separa los elementos
+    var require = toSplit.split(';');
+    //se verifica si existen todos los permisos.
+    if(!comparator(require, this.data)){
+        //se verifica si el modo esta soportado
+        if(this[mode] instanceof Function){
+            //se invoca al encargado de procesar el elemento
+            this[mode]({
+                el :$(el),
+                require : require
+            });
+        }else{
+            throw  'Value of data-require-fail `'+mode+'` is not valid';
+        }
+        //se invoca al handler si es que este existe
+        if(this.handler instanceof Function){
+            options.handler({
+                el :$(el),
+                require : require
+            });
+        }
+    }
+    this.afterProcess($(el));
+}
+/**
  * Este método se encarga de verificar los permisos del usuario y
  * realizar una opreacion dependiendo del modo asociado al tag HTML.
  * @function
@@ -130,40 +200,13 @@ _securityjs.contains = function(require, data){
 _securityjs.initialize = function (){
     //se obtienen todos los permisos
     var thiz = this;
+    //se obtienen todos los elementos que tienen el atributo not require
+    $(this.scope + ' [data-not-require]').each(function(){
+        thiz.processDom(this, 'data-not-require', thiz.notContains);
+    });
     //se obtienen todos los elementos que tienen el atributo require
     $(this.scope+' [data-require]').each(function(){
-        // se obtienen los permisos definidos en atributo require del
-        // componente de html.
-        var toSplit = $(this).attr('data-require');
-        //se obtiene el modo de procesar el tag
-        var mode = $(this).attr('data-require-fail');
-        //por default se toma remove
-        if(typeof mode == "undefined"){
-            mode="remove";
-        }
-        //se separa los elementos
-        var require = toSplit.split(';');
-        //se verifica si existen posee los permisos.
-        if(!thiz.contains(require, thiz.data)){
-            //se verifica si el modo esta soportado
-            if(thiz[mode] instanceof Function){
-                //se invoca al encargado de procesar el elemento
-                thiz[mode]({
-                    el :$(this),
-                    require : require
-                });
-            }else{
-                throw  'Value of data-require-fail `'+mode+'` is not valid';
-            }
-            //se invoca al handler si es que este existe
-            if(thiz.handler instanceof Function){
-                options.handler({
-                    el :$(this),
-                    require : require
-                });
-            }
-        }
-        thiz.afterProcess($(this))
+        thiz.processDom(this, 'data-require', thiz.contains);
     });
 };
 
