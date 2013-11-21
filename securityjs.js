@@ -1,3 +1,11 @@
+'use strict';
+/**
+ * Este namespace se utiliza para agrupar los metodos que se utilizan
+ * para verificar los permisos de las vistas.
+ *
+ * @namespace
+ * @author <a href="mailto:mxbg.py@gmail.com">Maximiliano Báez</a>
+ */
 var _securityjs = {
     /**
      * Por default el scope es toda la página
@@ -5,14 +13,14 @@ var _securityjs = {
      * @field
      * @name SecurityJS#scope
      */
-    scope : "",
+    scope: "",
     /**
      * La lista de permisos con los que se cuenta.
      * @type String[]
      * @field
      * @name SecurityJS#data
      */
-    data : [],
+    data: [],
     /**
      * Se encarga de manejar aquellos elementos que cuenten con el valor
      * `remove` en el atributo `data-require-fail`.Por default se elimina
@@ -26,7 +34,7 @@ var _securityjs = {
      * @config {String[]}require el valor definido en el atributo
      *          data-require del `el` procesado.
      */
-    remove : function(options){
+    remove: function (options) {
         //se elimina el elemento si el usuario no posee los
         //permisos necesarios para ver el componente.
         $(options.el).remove();
@@ -44,7 +52,7 @@ var _securityjs = {
      * @config {String[]}require el valor definido en el atributo
      *          data-require del `el` procesado.
      */
-    disable : function(options){
+    disable: function (options) {
         $(options.el).attr('disabled', true);
     },
     /**
@@ -60,8 +68,8 @@ var _securityjs = {
      * @config {String[]}require El valor definido en el atributo
      *          data-require del `el` procesado.
      */
-    hide : function(options){
-        $(options.el).attr('style','visibility:hidden');
+    hide: function (options) {
+        $(options.el).attr('style', 'visibility:hidden');
     },
     /**
      * Se encarga de manejar aquellos elementos que cuenten con el valor
@@ -76,7 +84,7 @@ var _securityjs = {
      * @config {String[]}require  el valor definido en el atributo
      *          data-require del `el` procesado.
      */
-    error : function(options){
+    error: function (options) {
         $(options.el).html("Forbbiden!!");
     },
     /**
@@ -88,7 +96,7 @@ var _securityjs = {
      * @name SecurityJS#afterProcess
      * @param {Dom}el  El dom asociado al tag procesado.
      */
-    afterProcess : function(el){
+    afterProcess: function (el) {
         $(el).removeAttr('data-require');
         $(el).removeAttr('data-require-fail');
     }
@@ -107,11 +115,16 @@ var _securityjs = {
  * @return {Boolean} True si todos existen todos los permisos,
  *          en caso contrario retorna False.
  */
-_securityjs.contains = function(require, data){
-    for(var i=0; i<require.length; i++){
+_securityjs.contains = function (require, data) {
+    var array = data;
+    if (typeof data === "function") {
+        array = data();
+    }
+
+    for (var i = 0; i < require.length; i++) {
         var permiso = require[i].trim();
-        var status = (data.indexOf(permiso) >= 0);
-        if(!status){
+        var status = (array.indexOf(permiso) >= 0);
+        if (!status) {
             return false;
         }
     }
@@ -131,11 +144,16 @@ _securityjs.contains = function(require, data){
  * @return {Boolean} True si no existen todos los permisos,
  *          en caso contrario retorna False.
  */
-_securityjs.notContains = function(require, data){
-    for(var i=0; i<require.length; i++){
+_securityjs.notContains = function (require, data) {
+    var array = data;
+    if (typeof data == "function") {
+        array = data();
+    }
+
+    for (var i = 0; i < require.length; i++) {
         var permiso = require[i].trim();
-        var status = (data.indexOf(permiso) >= 0);
-        if(status){
+        var status = (array.indexOf(permiso) >= 0);
+        if (status) {
             return false;
         }
     }
@@ -154,35 +172,35 @@ _securityjs.notContains = function(require, data){
  * @param {Function} comparator  Funcion que se encarga de comparar los
  *      los elementos.
  */
-_securityjs.processDom =  function(el, dataAttr, comparator){
+_securityjs.processDom = function (el, dataAttr, comparator) {
     // se obtienen los permisos definidos en atributo require del
     // componente de html.
     var toSplit = $(el).attr(dataAttr);
     //se obtiene el modo de procesar el tag
     var mode = $(el).attr('data-require-fail');
     //por default se toma remove
-    if(typeof mode == "undefined"){
-        mode="remove";
+    if (typeof mode == "undefined") {
+        mode = "remove";
     }
     //se separa los elementos
     var require = toSplit.split(';');
     //se verifica si existen todos los permisos.
-    if(!comparator(require, this.data)){
+    if (!comparator(require, this.data)) {
         //se verifica si el modo esta soportado
-        if(this[mode] instanceof Function){
+        if (this[mode] instanceof Function) {
             //se invoca al encargado de procesar el elemento
             this[mode]({
-                el :$(el),
-                require : require
+                el: $(el),
+                require: require
             });
-        }else{
-            throw  'Value of data-require-fail `'+mode+'` is not valid';
+        } else {
+            throw 'Value of data-require-fail `' + mode + '` is not valid';
         }
         //se invoca al handler si es que este existe
-        if(this.handler instanceof Function){
+        if (this.handler instanceof Function) {
             options.handler({
-                el :$(el),
-                require : require
+                el: $(el),
+                require: require
             });
         }
     }
@@ -197,15 +215,15 @@ _securityjs.processDom =  function(el, dataAttr, comparator){
  * @author <a href="mailto:mxbg.py@gmail.com">Maximiliano Báez</a>
  * @name SecurityJS#initialize
  */
-_securityjs.initialize = function (){
+_securityjs.initialize = function () {
     //se obtienen todos los permisos
     var thiz = this;
     //se obtienen todos los elementos que tienen el atributo not require
-    $(this.scope + ' [data-not-require]').each(function(){
+    $(this.scope + ' [data-not-require]').each(function () {
         thiz.processDom(this, 'data-not-require', thiz.notContains);
     });
     //se obtienen todos los elementos que tienen el atributo require
-    $(this.scope+' [data-require]').each(function(){
+    $(this.scope + ' [data-require]').each(function () {
         thiz.processDom(this, 'data-require', thiz.contains);
     });
 };
@@ -249,12 +267,19 @@ _securityjs.initialize = function (){
  *         `data-require` y `data-require-fail`.
  */
 var SecurityJS = function (options) {
-    if(!options){options={}}
+    if (!options) {
+        options = {}
+    }
     //se define la clase
-    var clazz={};
-    //se realiza un extend de json principal para y un merge entre
-    //los atributos y metodos.
-    $.extend(true,clazz,_securityjs, options);
+    var clazz = {};
+    /*
+     * Se realiza un extend de json principal para y un merge entre los
+     * atributos y metodos.
+     */
+    //Se hace merge con los atributos añadidos via prototype y el options
+    $.extend(true, clazz, this, options);
+    //se hace un merge con los atributos base los obtenidos del merge anterior
+    clazz = $.extend(true, {}, _securityjs, clazz);
     //se invoca al constructor de la clase
     clazz.initialize(options);
     //se retorna la definicion de la clase
