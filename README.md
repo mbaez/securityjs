@@ -88,6 +88,22 @@ var sjs = new SecurityJS({
     }
 });
 
+
+```
+*Using js prototype*
+```javascript
+/** */
+SecurityJS.prototype.disable = function(options){
+      //do something
+}
+/**
+* data-required='newState' handler
+*/
+SecurityJS.prototype.newState = function(options){
+      //do something
+}
+
+var sjs = new SecurityJS({data : [..]});
 ```
 
 ##Browser Support
