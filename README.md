@@ -3,11 +3,11 @@ SecurityJS
 SecurityJS is a JavaScript library, that aims to simplify the management of permissions in HTML&JavaScript applications. It's based on the use of
 [custom data attribute](http://www.w3.org/html/wg/drafts/html/master/dom.html#embedding-custom-non-visible-data-with-the-data-*-attributes)
  in HTML tags.
-##How it works?
+## How it works?
 SecurityJS uses [JQuery](http://jquery.com/) to process each html tag  pre configured,
 this is possible  ​​using custom data attributes in html tags.
 
-###Supported attributes
+### Supported attributes
 * **data-require** : contains the required permissions for this tag. If the item does not have the permission,  triggers the event 'require-fail'.
 * **data-not-require** : it's negation of the attribute 'data-require'. If the item has the permission, triggers the event 'require-fail'.
 * **data-require-fail** : defines the state and how to process the tag.
@@ -18,7 +18,7 @@ this is possible  ​​using custom data attributes in html tags.
 * **hide** : makes it hide the html tag associated.
 * **error** : adds the message `Forbbiden!!`.
 
-##Usage
+## Usage
 Below is quick example how to use SecurityJS:
 
 *Download the latest version library and include it in your html.*
@@ -53,7 +53,7 @@ var options = {
 var sjs = new SecurityJS(options);
 ```
 
-###Custom States
+### Custom States
 To create custom states, simply define the state name and add the handler for it. The state name and the handler must be the same.
 
 *Define the state name :*
@@ -106,11 +106,11 @@ SecurityJS.prototype.newState = function(options){
 var sjs = new SecurityJS({data : [..]});
 ```
 
-##Browser Support
+## Browser Support
 
 SecurityJS has been tested in IE 8+, Firefox 4+, Safari 5+, Chromium 25+ and Opera 10+.
 
-##Want to contribute?
+## Want to contribute?
 
 If you've found a bug or have a great idea for new feature let me know by [adding your suggestion]
 (http://github.com/mbaez/securityjs/issues/new) to [issues list](https://github.com/mbaez/securityjs/issues).
