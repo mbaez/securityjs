@@ -1,0 +1,19 @@
+{
+  "name": "securityjs",
+  "version": "1.0.0",
+  "description": "SecurityJS is a JavaScript library, that aims to simplify the management of permissions in HTML&JavaScript applications",
+  "directories": {
+    "doc": "doc",
+    "example": "example"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://mbaez@github.com/mbaez/securityjs.git"
+  },
+  "author": "Maximiliano Báez<maxibaezpy@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mbaez/securityjs/issues"
+  },
+  "homepage": "https://github.com/mbaez/securityjs#readme"
+}
