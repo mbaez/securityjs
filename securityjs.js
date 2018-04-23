@@ -218,12 +218,13 @@ _securityjs.processDom = function (el, dataAttr, comparator) {
 _securityjs.initialize = function () {
     //se obtienen todos los permisos
     var thiz = this;
+    
     //se obtienen todos los elementos que tienen el atributo not require
-    $(this.scope + ' [data-not-require]').each(function () {
+    $(this.scope).find('[data-not-require]').each(function () {
         thiz.processDom(this, 'data-not-require', thiz.notContains);
     });
     //se obtienen todos los elementos que tienen el atributo require
-    $(this.scope + ' [data-require]').each(function () {
+    $(this.scope).find('[data-require]').each(function () {
         thiz.processDom(this, 'data-require', thiz.contains);
     });
 };
